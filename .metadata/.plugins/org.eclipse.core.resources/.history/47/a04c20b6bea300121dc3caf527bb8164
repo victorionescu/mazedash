@@ -1,0 +1,11 @@
+package com.ox.team9.mazedash.model;
+
+import com.badlogic.gdx.graphics.g2d.Sprite;
+
+public abstract class SolidBlock implements Block {
+
+	protected int x, y;
+	@Override
+	public abstract void draw(Sprite sprite);
+
+}

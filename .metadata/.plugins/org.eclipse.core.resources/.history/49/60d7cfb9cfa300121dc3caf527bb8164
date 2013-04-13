@@ -1,0 +1,5 @@
+package com.ox.team9.mazedash.model;
+
+public interface WorldElement {
+
+}

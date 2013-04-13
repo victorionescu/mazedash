@@ -1,0 +1,17 @@
+package com.ox.team9.mazedash.model;
+
+import java.util.LinkedList;
+
+public class World {
+	private final int rows, columns;
+	private final LinkedList<WorldElement>[][] elements;
+	
+	public World(int rows, int columns) {
+		this.rows = rows;
+		this.columns = columns;
+		
+		elements = new LinkedList<WorldElement>[rows][columns];
+	}
+	
+	
+}

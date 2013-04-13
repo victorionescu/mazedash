@@ -1,0 +1,10 @@
+package com.ox.team9.mazedash.model;
+
+public class World {
+	private int rows, columns;
+	
+	public World(int rows, int columns) {
+		this.rows = rows;
+		this.columns = columns;
+	}
+}
