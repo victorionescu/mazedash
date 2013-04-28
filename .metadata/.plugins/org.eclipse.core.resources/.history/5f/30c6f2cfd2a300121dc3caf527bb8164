@@ -1,7 +1,0 @@
-package com.ox.team9.mazedash.model;
-
-public class World {
-	public World(int rows, int columns) {
-		
-	}
-}
