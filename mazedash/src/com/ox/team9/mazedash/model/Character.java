@@ -1,5 +1,13 @@
 package com.ox.team9.mazedash.model;
 
-public abstract class Character implements WorldElement {
+import com.badlogic.gdx.graphics.Texture;
 
+public abstract class Character extends WorldElement {
+	public Character(Texture sprites) {
+		super(sprites);
+	}
+	
+	public Character(Texture sprites, int yOffset) {
+		super(sprites, yOffset);
+	}
 }

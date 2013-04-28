@@ -1,7 +1,13 @@
 package com.ox.team9.mazedash.model;
 
-public class Gate implements WorldElement {
+import com.badlogic.gdx.graphics.Texture;
 
+public class Gate extends WorldElement {
+
+	public Gate(Texture sprites) {
+		super(sprites);
+	}
+	
 	@Override
 	public int spriteColumn() {
 		// TODO Auto-generated method stub

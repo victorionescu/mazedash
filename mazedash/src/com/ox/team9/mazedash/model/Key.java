@@ -1,7 +1,13 @@
 package com.ox.team9.mazedash.model;
 
-public class Key implements WorldElement {
+import com.badlogic.gdx.graphics.Texture;
 
+public class Key extends WorldElement {
+
+	public Key(Texture sprites) {
+		super(sprites);
+	}
+	
 	@Override
 	public int spriteColumn() {
 		// TODO Auto-generated method stub
