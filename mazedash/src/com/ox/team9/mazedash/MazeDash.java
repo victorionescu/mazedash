@@ -10,30 +10,39 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
+import com.ox.team9.mazedash.model.World;
+import com.ox.team9.mazedash.model.WorldGenerator;
+
 public class MazeDash implements ApplicationListener {
 	private OrthographicCamera camera;
 	private SpriteBatch batch;
 	private Texture sprites;
-	private Sprite[][] environment;
+	
+	private World world;
+	
+	private WorldGenerator worldGenerator;
 	
 	@Override
 	public void create() {		
 		
 		camera = new OrthographicCamera();
-		camera.setToOrtho(false, 800, 480);
+		camera.setToOrtho(false, 780, 480);
 		
 		batch = new SpriteBatch();
 		
 		sprites = new Texture(Gdx.files.internal("sprites.png"));
 		
-		environment = new Sprite[25][10];
+		worldGenerator = new WorldGenerator(12, 8);
 		
+		world = worldGenerator.getWorld();
+		
+		/*
 		for (int i = 0; i < 25; i += 1) {
 			for (int j = 0; j < 10; j += 1) {
 				environment[i][j] = new Sprite(sprites, 330, 115, 32, 55);
 				environment[i][j].setPosition(i * 32, j * 27);
 			}
-		}
+		}*/
 		
 	}
 
@@ -50,11 +59,7 @@ public class MazeDash implements ApplicationListener {
 		batch.setProjectionMatrix(camera.combined);
 		batch.begin();
 		
-		for (int i = 24; i >= 0; i -= 1) {
-			for (int j = 9; j >= 0; j -= 1) {
-				environment[i][j].draw(batch);
-			}
-		}
+		world.draw();
 		
 		batch.end();
 		
