@@ -9,11 +9,11 @@ public class HighStoneBlock extends HighBlock {
 	
 	@Override
 	public int spriteColumn() {
-		return 1;
+		return 0;
 	}
 
 	@Override
 	public int spriteRow() {
-		return 16;
+		return 15;
 	}
 }

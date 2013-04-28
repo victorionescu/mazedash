@@ -2,6 +2,7 @@ package com.ox.team9.mazedash.model;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public abstract class WorldElement {
 	protected Sprite sprite;
@@ -18,5 +19,5 @@ public abstract class WorldElement {
 	
 	public abstract int spriteRow();
 	
-	public abstract void draw(int row, int column, int height);
+	public abstract void draw(int row, int column, int height, SpriteBatch spriteBatch);
 }

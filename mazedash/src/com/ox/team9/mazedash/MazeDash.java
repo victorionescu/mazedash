@@ -32,17 +32,9 @@ public class MazeDash implements ApplicationListener {
 		
 		sprites = new Texture(Gdx.files.internal("sprites.png"));
 		
-		worldGenerator = new WorldGenerator(12, 8, sprites);
+		worldGenerator = new WorldGenerator(8, 12, sprites);
 		
 		world = worldGenerator.getWorld();
-		
-		/*
-		for (int i = 0; i < 25; i += 1) {
-			for (int j = 0; j < 10; j += 1) {
-				environment[i][j] = new Sprite(sprites, 330, 115, 32, 55);
-				environment[i][j].setPosition(i * 32, j * 27);
-			}
-		}*/
 		
 	}
 
@@ -59,7 +51,13 @@ public class MazeDash implements ApplicationListener {
 		batch.setProjectionMatrix(camera.combined);
 		batch.begin();
 		
-		world.draw();
+		//Sprite sprite = new Sprite(sprites, 0, 104 * 15, 60, 104);
+		
+		//sprite.setPosition(0, 0);
+		
+		//sprite.draw(batch);
+		
+		world.draw(batch);
 		
 		batch.end();
 		

@@ -1,6 +1,7 @@
 package com.ox.team9.mazedash.model;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class Gate extends WorldElement {
 
@@ -21,7 +22,7 @@ public class Gate extends WorldElement {
 	}
 	
 	@Override
-	public void draw(int row, int column, int height) {
+	public void draw(int row, int column, int height, SpriteBatch spriteBatch) {
 		
 	}
 
