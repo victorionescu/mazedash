@@ -2,6 +2,7 @@ package com.ox.team9.mazedash.model;
 
 import com.ox.team9.mazedash.util.Array2D;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import java.util.Stack;
@@ -10,12 +11,16 @@ public class World {
 	private final int rows, columns;
 	private final Array2D<Stack<WorldElement>> environment;
 	
+	private final WorldElement player;
+	
 	// Player position.
 	private int playerRow, playerColumn;
 	
-	public World(int rows, int columns) {
+	public World(int rows, int columns, Texture sprites) {
 		this.rows = rows;
 		this.columns = columns;
+		
+		player = new Player(sprites);
 		
 		// Initialize 2D environment.
 		environment = new Array2D<Stack<WorldElement>>(rows, columns);
@@ -45,5 +50,7 @@ public class World {
 		
 		environment.getElement(1, 0).peek().draw(1, 0, 0, spriteBatch);
 		environment.getElement(0, 0).peek().draw(0, 0, 0, spriteBatch);
+		
+		player.draw(playerRow, playerColumn, 2, spriteBatch);
 	}
 }

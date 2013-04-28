@@ -12,7 +12,7 @@ public class WorldGenerator {
 		this.rows = rows;
 		this.columns = columns;
 		
-		world = new World(rows, columns);
+		world = new World(rows, columns, sprites);
 		
 		
 		// Create a "flat" world
