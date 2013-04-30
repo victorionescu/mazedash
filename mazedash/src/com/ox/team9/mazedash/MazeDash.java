@@ -2,6 +2,7 @@ package com.ox.team9.mazedash;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.GL10;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -10,6 +11,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
+import com.ox.team9.mazedash.model.Player;
 import com.ox.team9.mazedash.model.World;
 import com.ox.team9.mazedash.model.WorldGenerator;
 
@@ -32,7 +34,7 @@ public class MazeDash implements ApplicationListener {
 		
 		sprites = new Texture(Gdx.files.internal("sprites.png"));
 		
-		worldGenerator = new WorldGenerator(8, 12, sprites);
+		worldGenerator = new WorldGenerator(6, 13, sprites);
 		
 		world = worldGenerator.getWorld();
 		
@@ -44,18 +46,28 @@ public class MazeDash implements ApplicationListener {
 	}
 
 	@Override
-	public void render() {		
+	public void render() {	
+		if (Gdx.input.isKeyPressed(Keys.UP)) {
+			//System.out.println("UP IS PRESSED");
+			int dY = (int)(Gdx.graphics.getDeltaTime() * Player.SPEED_IN_PX_PER_SECOND);
+			world.movePlayer(0, dY, 0);
+			
+		} else if (Gdx.input.isKeyPressed(Keys.DOWN)) {
+			int dY = -(int)(Gdx.graphics.getDeltaTime() * Player.SPEED_IN_PX_PER_SECOND);
+			world.movePlayer(0, dY, 0);
+		} else if (Gdx.input.isKeyPressed(Keys.LEFT)) {
+			int dX = -(int)(Gdx.graphics.getDeltaTime() * Player.SPEED_IN_PX_PER_SECOND);
+			world.movePlayer(dX, 0, 0);
+		} else if (Gdx.input.isKeyPressed(Keys.RIGHT)) {
+			int dX = (int)(Gdx.graphics.getDeltaTime() * Player.SPEED_IN_PX_PER_SECOND);
+			world.movePlayer(dX, 0, 0);
+		}
+		
 		Gdx.gl.glClearColor(1, 1, 1, 1);
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 		
 		batch.setProjectionMatrix(camera.combined);
 		batch.begin();
-		
-		//Sprite sprite = new Sprite(sprites, 0, 104 * 15, 60, 104);
-		
-		//sprite.setPosition(0, 0);
-		
-		//sprite.draw(batch);
 		
 		world.draw(batch);
 		

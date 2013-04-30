@@ -5,16 +5,23 @@ import com.ox.team9.mazedash.util.Array2D;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-import java.util.Stack;
+import java.util.ArrayList;
 
 public class World {
-	private final int rows, columns;
-	private final Array2D<Stack<WorldElement>> environment;
+	public static final int CELL_SIDE_IN_PX = 60;
+	public static final int CELL_3D_SIDE_IN_PX = 48;
 	
+	
+	private final int rows, columns;
+	private final Array2D<ArrayList<WorldElement>> environment;
+	
+	// Player element.
 	private final WorldElement player;
 	
 	// Player position.
-	private int playerRow, playerColumn;
+	private int playerX, playerY, playerH;
+	
+	
 	
 	public World(int rows, int columns, Texture sprites) {
 		this.rows = rows;
@@ -23,34 +30,61 @@ public class World {
 		player = new Player(sprites);
 		
 		// Initialize 2D environment.
-		environment = new Array2D<Stack<WorldElement>>(rows, columns);
+		environment = new Array2D<ArrayList<WorldElement>>(rows, columns);
 		
 		// Initialize the element stack for every cell.
 		for (int row = 0; row < rows; row += 1)
 			for (int column = 0; column < columns; column += 1)
-				environment.putElement(new Stack<WorldElement>(), row, column);
+				environment.putElement(new ArrayList<WorldElement>(), row, column);
 	}
 	
 	
 	// Stack element up at (row, column).
 	public void addElement(int row, int column, WorldElement element) {
-		environment.getElement(row, column).push(element);
+		environment.getElement(row, column).add(element);
+	}
+	
+	// Get height of cell (row, column).
+	public int getHeightAt(int row, int column) {
+		int totalHeight = 0;
+		
+		for (WorldElement worldElement : environment.getElement(row, column)) {
+			totalHeight += worldElement.getHeight();
+		}
+		
+		return totalHeight;
 	}
 	
 	
-	// Set position of the player.
+	// Place player on top of the tower at (playerRow, playerColumn).
 	public void setPlayer(int playerRow, int playerColumn) {
-		this.playerRow = playerRow;
-		this.playerColumn = playerColumn;
+		playerY = playerRow * CELL_SIDE_IN_PX + CELL_SIDE_IN_PX / 2;
+		playerX = playerColumn * CELL_SIDE_IN_PX + CELL_SIDE_IN_PX / 2;
+		playerH = getHeightAt(playerRow, playerColumn);
+	}
+	
+	public void movePlayer(int dX, int dY, int dH) {
+		playerX += dX;
+		playerY += dY;
+		playerH += dH;
 	}
 	
 	// Draw the world.
 	public void draw(SpriteBatch spriteBatch) {
 		System.out.println("Drawing the world!");
 		
-		environment.getElement(1, 0).peek().draw(1, 0, 0, spriteBatch);
-		environment.getElement(0, 0).peek().draw(0, 0, 0, spriteBatch);
+		for (int row = rows - 1; row >= 0; row -= 1)
+			for (int column = 0; column < columns; column += 1) {
+				int height = 0;
+				for (WorldElement worldElement : environment.getElement(row, column)) {
+					worldElement.draw(column * World.CELL_SIDE_IN_PX, row * World.CELL_SIDE_IN_PX,
+							height, spriteBatch);
+					
+					height += worldElement.getHeight();
+				}
+			}
 		
-		player.draw(playerRow, playerColumn, 2, spriteBatch);
+		player.draw(playerX - World.CELL_SIDE_IN_PX / 2, playerY - World.CELL_SIDE_IN_PX / 2,
+				playerH, spriteBatch);
 	}
 }

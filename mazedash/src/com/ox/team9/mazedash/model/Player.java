@@ -4,6 +4,9 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class Player extends Character {
+	
+	public static final int SPEED_IN_PX_PER_SECOND = 150;
+	
 	public Player(Texture sprites) {
 		super(sprites);
 	}
@@ -19,8 +22,8 @@ public class Player extends Character {
 	}
 	
 	@Override
-	public void draw(int row, int column, int height, SpriteBatch spriteBatch) {
-		sprite.setPosition(column * 60, row * 50 + height * 24);
-		sprite.draw(spriteBatch);
+	public int getHeight() {
+		return 0;
 	}
+	
 }

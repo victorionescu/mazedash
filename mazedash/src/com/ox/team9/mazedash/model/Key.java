@@ -18,12 +18,12 @@ public class Key extends WorldElement {
 	@Override
 	public int spriteRow() {
 		// TODO Auto-generated method stub
-		return 0;
+		return 6;
 	}
 	
 	@Override
-	public void draw(int row, int column, int height, SpriteBatch spriteBtach) {
-		
+	public int getHeight() {
+		return 0;
 	}
 
 }

@@ -5,19 +5,39 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public abstract class WorldElement {
+	/*
+	 * Sprite object that will handle drawing the element.
+	 */
 	protected Sprite sprite;
 	
+	
+	/*
+	 * Constructors.
+	 */
 	public WorldElement(Texture sprites) {
 		sprite = new Sprite(sprites, spriteColumn() * 60, spriteRow() * 104, 60, 104);
 	}
 	
-	public WorldElement(Texture sprites, int yOffset) {
-		sprite = new Sprite(sprites, spriteColumn() * 60, spriteRow() * 104, 60, 104 - yOffset);
-	}
 	
+	/*
+	 * The position of the graphics in the sprite grid.
+	 */
 	public abstract int spriteColumn();
 	
 	public abstract int spriteRow();
 	
-	public abstract void draw(int row, int column, int height, SpriteBatch spriteBatch);
+	
+	/*
+	 * The height of the element.
+	 */
+	public abstract int getHeight();
+	
+	
+	/*
+	 * Draw the element to spriteBatch.
+	 */
+	public void draw(int X, int Y, int H, SpriteBatch spriteBatch) {
+		sprite.setPosition(X, Y * World.CELL_3D_SIDE_IN_PX / World.CELL_SIDE_IN_PX + H);
+		sprite.draw(spriteBatch);
+	}
 }

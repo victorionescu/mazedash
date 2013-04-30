@@ -6,8 +6,4 @@ public abstract class Character extends WorldElement {
 	public Character(Texture sprites) {
 		super(sprites);
 	}
-	
-	public Character(Texture sprites, int yOffset) {
-		super(sprites, yOffset);
-	}
 }

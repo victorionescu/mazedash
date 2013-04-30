@@ -9,7 +9,7 @@ public abstract class HighBlock extends Block {
 	
 	@Override
 	public int getHeight() {
-		return 2;
+		return 48;
 	}
 
 }

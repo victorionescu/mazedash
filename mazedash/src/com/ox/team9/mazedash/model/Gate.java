@@ -12,18 +12,18 @@ public class Gate extends WorldElement {
 	@Override
 	public int spriteColumn() {
 		// TODO Auto-generated method stub
-		return 0;
+		return 1;
 	}
 
 	@Override
 	public int spriteRow() {
 		// TODO Auto-generated method stub
-		return 0;
+		return 3;
 	}
 	
 	@Override
-	public void draw(int row, int column, int height, SpriteBatch spriteBatch) {
-		
+	public int getHeight() {
+		return 0;
 	}
 
 }
