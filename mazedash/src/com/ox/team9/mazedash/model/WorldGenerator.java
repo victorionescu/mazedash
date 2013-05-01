@@ -21,6 +21,8 @@ public class WorldGenerator {
 				world.addElement(row, column, new HighStoneBlock(sprites));
 			}
 		
+		world.addElement(1, 0, new HighStoneBlock(sprites));
+		
 		// Generate graph here.
 		
 		// Place key at (rows - 1, 0).
