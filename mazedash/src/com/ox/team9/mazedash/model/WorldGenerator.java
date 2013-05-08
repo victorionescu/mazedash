@@ -21,7 +21,7 @@ public class WorldGenerator {
 				world.addElement(row, column, new HighStoneBlock(sprites));
 			}
 		
-		world.addElement(1, 0, new HighStoneBlock(sprites));
+		world.addElement(1, 0, new Tree(sprites));
 		
 		// Generate graph here.
 		

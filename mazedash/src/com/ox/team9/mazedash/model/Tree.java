@@ -20,7 +20,7 @@ public class Tree extends Obstacle {
 	@Override
 	public int spriteRow() {
 		// TODO Auto-generated method stub
-		return 0;
+		return 16;
 	}
 
 	@Override
@@ -33,7 +33,7 @@ public class Tree extends Obstacle {
 	public void accept(ArrayList<WorldElement> tower,
 			WorldElementVisitor visitor) {
 		// TODO Auto-generated method stub
-
+		visitor.visit(tower, this);
 	}
 
 }
