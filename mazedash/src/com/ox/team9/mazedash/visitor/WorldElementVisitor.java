@@ -14,4 +14,6 @@ public interface WorldElementVisitor {
 	void visit(ArrayList<WorldElement> tower, Block block);
 
 	void visit(ArrayList<WorldElement> tower, Player player);
+	
+	void visit(ArrayList<WorldElement> tower, Obstacle obstacle);
 }

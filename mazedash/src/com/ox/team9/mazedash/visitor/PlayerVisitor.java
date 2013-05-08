@@ -44,6 +44,17 @@ public class PlayerVisitor implements WorldElementVisitor {
 	}
 	
 	@Override
+	public void visit(ArrayList<WorldElement> tower, Obstacle obstacle) {
+		if (visited) {
+			throw new IllegalStateException();
+		}
+		
+		visited = true;
+		
+		canVisit = false;
+	}
+	
+	@Override
 	public void visit(ArrayList<WorldElement> tower, Player player) {
 		
 	}
