@@ -4,15 +4,21 @@ import com.badlogic.gdx.graphics.Texture;
 
 public class WorldGenerator {
 
-	private final World world;
+	private World world;
+	
+	private final Texture sprites;
 	
 	private final int rows, columns;
 	
 	public WorldGenerator(int rows, int columns, Texture sprites) {
+		this.sprites = sprites;
+		
 		this.rows = rows;
 		this.columns = columns;
-		
-		world = new World(rows, columns, sprites);
+	}
+	
+	public World getWorld(GameState gameState) {
+		world = new World(rows, columns, sprites, gameState);
 		
 		
 		// Create a "flat" world
@@ -33,9 +39,7 @@ public class WorldGenerator {
 		
 		// Place player at (0, 0).
 		world.setPlayer(0, 0);
-	}
-	
-	public World getWorld() {
+		
 		return world;
 	}
 	

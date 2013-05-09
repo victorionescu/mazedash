@@ -23,11 +23,18 @@ public class World {
 	// Player position.
 	private int playerX, playerY, playerH;
 	
+	// Game state.
+	private final GameState gameState;
+	
+	// Sprites.
+	private final Texture sprites;
 	
 	
-	public World(int rows, int columns, Texture sprites) {
+	public World(int rows, int columns, Texture sprites, GameState gameState) {
 		this.rows = rows;
 		this.columns = columns;
+		this.gameState = gameState;
+		this.sprites = sprites;
 		
 		player = new Player(sprites);
 		
@@ -101,6 +108,11 @@ public class World {
 	}
 	
 	private boolean validPlayerCoordinates(int X, int Y, int H) {
+		if (X < Player.SIZE_IN_PX / 2 || X > columns * CELL_SIDE_IN_PX - Player.SIZE_IN_PX / 2 ||
+				Y < Player.SIZE_IN_PX / 2 || Y > rows * CELL_SIDE_IN_PX - Player.SIZE_IN_PX / 2) {
+			return false;
+		}
+		
 		for (int row = 0; row < rows; row += 1)
 			for (int column = 0; column < columns; column += 1) {
 				int playerMinX = X - Player.SIZE_IN_PX / 2;
@@ -124,7 +136,7 @@ public class World {
 							
 							PlayerVisitor playerVisitor = new PlayerVisitor();
 							
-							element.accept(environment.getElement(row, column), playerVisitor);
+							element.accept(gameState, environment.getElement(row, column), playerVisitor);
 							
 							if (!playerVisitor.couldVisit()) {
 								return false;
@@ -143,7 +155,7 @@ public class World {
 	
 	// Draw the world.
 	public void draw(SpriteBatch spriteBatch) {
-		System.out.println("Drawing the world!");
+		//System.out.println("Drawing the world!");
 		
 		for (int row = rows - 1; row >= 0; row -= 1) {
 			for (int column = 0; column < columns; column += 1) {
@@ -162,5 +174,27 @@ public class World {
 						playerH, spriteBatch);
 			}
 		}
+	}
+	
+	protected void setPlayerCoords(int playerX, int playerY, int playerH) {
+		this.playerX = playerX;
+		this.playerY = playerY;
+		this.playerH = playerH;
+	}
+	
+	public World clone() {
+		World newWorld = new World(rows, columns, sprites, gameState);
+		
+		newWorld.setPlayerCoords(playerX, playerY, playerH);
+		
+		for (int row = 0; row < rows; row += 1) {
+			for (int column = 0; column < columns; column += 1) {
+				for (WorldElement element : environment.getElement(row, column)) {
+					newWorld.addElement(row, column, element.cloneElement());
+				}
+			}
+		}
+		
+		return newWorld;
 	}
 }
